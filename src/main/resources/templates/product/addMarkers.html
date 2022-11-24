@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/font-awesome/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/custom/style.css}">
+    <script th:src="@{/font-awesome/js/all.js}"></script>
+
+    <!-- DataTable -->
+    <link rel="stylesheet" th:href="@{./datademo/dataTables.min.css}">
+    <!-- <link rel="stylesheet" href="./datademo/responsive.bootstrap4.min.css"> -->
+</head>
+
+<body>
+
+<!-- sidebar -->
+<div class="wrapper">
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <a th:href="@{/home}" style="text-align: center;">
+                <h3>ReaLists</h3>
+            </a>
+        </div>
+        <ul class="list-unstyled components">
+            <!-- <p style="text-align: center;"><i class="fas fa-user-md"></i></p> -->
+            <li class="text-center">
+                <img th:src="@{/images/find_user.png}" class="user-image img-responsive" />
+            </li>
+            <br>
+            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle"  style="text-align: center;"><i class="fas fa-user-cog"></i> Settings</a>
+
+                <ul class="collapse list-unstyled" id="homeSubmenu" style="text-align: center;">
+                    <li>
+                        <a th:href="@{/implants}">Implants</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/instruments}">Instruments</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/markers}">Markers</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/surgicalObjects}">Surgical Objects</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/sessions}">Sessions</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#securitySubmenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle" style="text-align: center;"><i class="fas fa-user-shield"></i> Security</a>
+                <ul class="collapse list-unstyled" id="securitySubmenu" style="text-align: center;">
+                    <li>
+                        <a href="#">Groups</a>
+                    </li>
+                    <li>
+                        <a href="#">Users</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#" style="text-align: center;"><i class="far fa-address-card"></i> About</a>
+            </li>
+
+            <li>
+                <a href="#" style="text-align: center;"><i class="fas fa-file-signature"></i> Contact Us</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Content -->
+    <div id="content">
+        <!-- sidebar btn -->
+        <nav class="navbar navbar-expend-lg navbar-light bg-light">
+            <div class="container-fluid row">
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fa fa-align-left"></i>
+                </button>
+                <a type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fa fa-user"></i>
+                </a>
+            </div>
+        </nav>
+        <br><br>
+        <!-- Content -->
+
+        <!-- Modal -->
+        <div class="container">
+            <div class="header-panel">
+                <h5 class="title" style="text-align: center;">ِAdd new Markers</h5>
+            </div>
+            <br><br>
+            <form th:action="@{/markers/addMarkers}" method="post" th:object="${markers}">
+                <input type="hidden" name="id"  th:field="*{id}">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label>Code</label>
+                            <input type="text" class="form-control" required th:field="*{code}" name="code" id="code" placeholder="Code">
+                        </div>
+                        <div class="col">
+                            <label>Name</label>
+                            <input type="text" class="form-control" required th:field="*{name}" name="name" id="name" placeholder="Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <!--                    <textarea class="form-control"  th:field="*{description}" name="description" id="description" rows="3"></textarea>-->
+                    <textarea class="form-control"  th:field="*{description}" name="description" id="htmeditor"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a th:href="@{/markers}" class="btn btn-secondary">Close</a>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<script th:src="@{/custom/htmleditor.js}" htmeditor_textarea="htmeditor" editor_height="250" run_local="no"> </script>
+<script th:src="@{/custom/jquery.js}"></script>
+<script th:src="@{/custom/jquery.slim.js}"></script>
+<script th:src="@{/custom/popper.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+<!-- DataTable -->
+<script th:src="@{/datademo/jquery.dataTables.min.js}"></script>
+<script th:src="@{/datademo/dataTables.bootstrap4.min.js}"></script>
+<script>
+    $(document).ready(function () {
+        $("#sidebarCollapse").on('click', function () {
+            $("#sidebar").toggleClass('active');
+        });
+    });
+
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+</body>
+
+</html>

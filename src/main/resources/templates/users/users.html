@@ -29,7 +29,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Admin</a>
+                <a class="navbar-brand" href="../index.html">Admin</a>
             </div>
             <div style="color: white;
 padding: 15px 50px 5px 50px;
@@ -47,13 +47,13 @@ font-size: 16px;"><a href="#" class="btn btn-danger square-btn-adjust">Logout</a
 
 
                     <li>
-                        <a href="index.html"><i class="fa fa-dashboard fa-2x"></i> Dashboard</a>
+                        <a href="../index.html"><i class="fa fa-dashboard fa-2x"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a class="active-menu" href="reports.html"><i class="fa fa-bar-chart-o fa-2x"></i>Reports</a>
+                        <a href="reports.html"><i class="fa fa-bar-chart-o fa-2x"></i>Reports</a>
                     </li>
                     <li>
-                        <a href="users.html"><i class="fa fa-table fa-2x"></i>Users</a>
+                        <a class="active-menu" href="users.html"><i class="fa fa-table fa-2x"></i>Users</a>
                     </li>
                     <li>
                         <a href="orderHistory.html"><i class="fa fa-table fa-2x"></i>Order History</a>
@@ -63,10 +63,10 @@ font-size: 16px;"><a href="#" class="btn btn-danger square-btn-adjust">Logout</a
                                 class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="productsList.html"><i class="fa fa-table fa-2x"></i>Products List</a>
+                                <a href="../productsList.html"><i class="fa fa-table fa-2x"></i>Products List</a>
                             </li>
                             <li>
-                                <a href="addProduct.html"><i class="fa fa-edit fa-2x"></i> Add Product </a>
+                                <a href="../addProduct.html"><i class="fa fa-edit fa-2x"></i> Add Product </a>
                             </li>
                         </ul>
                     </li>
@@ -92,7 +92,7 @@ font-size: 16px;"><a href="#" class="btn btn-danger square-btn-adjust">Logout</a
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Morris Charts</h2>
+                        <h2>Table Examples</h2>
                         <h5>Welcome Jhon Deo , Love to see you back. </h5>
 
                     </div>
@@ -101,61 +101,57 @@ font-size: 16px;"><a href="#" class="btn btn-danger square-btn-adjust">Logout</a
                 <hr />
 
                 <div class="row">
-
-
-                    <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="col-md-12">
+                        <!-- Advanced Tables -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Bar Chart Example
+                                Advanced Tables
                             </div>
                             <div class="panel-body">
-                                <div id="morris-bar-chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Area Chart Example
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-area-chart"></div>
-                            </div>
-                        </div>
-                    </div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover"
+                                        id="dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th>Rendering engine</th>
+                                                <th>Browser</th>
+                                                <th>Platform(s)</th>
+                                                <th>Engine version</th>
+                                                <th>CSS grade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="gradeC">
+                                                <td>Misc</td>
+                                                <td>PSP browser</td>
+                                                <td>PSP</td>
+                                                <td class="center">-</td>
+                                                <td class="center">C</td>
+                                            </tr>
+                                            <tr class="gradeU">
+                                                <td>Other browsers</td>
+                                                <td>All others</td>
+                                                <td>-</td>
+                                                <td class="center">-</td>
+                                                <td class="center">U</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
+                            </div>
+                        </div>
+                        <!--End Advanced Tables -->
+                    </div>
                 </div>
-                <!-- /. ROW  -->
-                <div class="row">
-
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Donut Chart Example
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-donut-chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Line Chart Example
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-line-chart"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- /. ROW  -->
+                <!-- End  Hover Rows  -->
             </div>
-            <!-- /. PAGE INNER  -->
         </div>
-        <!-- /. PAGE WRAPPER  -->
+
     </div>
+    <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
     <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
@@ -164,9 +160,14 @@ font-size: 16px;"><a href="#" class="btn btn-danger square-btn-adjust">Logout</a
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- METISMENU SCRIPTS -->
     <script src="assets/js/jquery.metisMenu.js"></script>
-    <!-- MORRIS CHART SCRIPTS -->
-    <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
-    <script src="assets/js/morris/morris.js"></script>
+    <!-- DATA TABLE SCRIPTS -->
+    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').dataTable();
+        });
+    </script>
     <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
 
