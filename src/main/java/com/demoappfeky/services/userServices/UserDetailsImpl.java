@@ -1,14 +1,14 @@
 package com.demoappfeky.services.userServices;
 
 import com.demoappfeky.model.Users;
+import com.demoappfeky.model.security.Authority;
+import com.demoappfeky.model.security.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -22,9 +22,10 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + this.users.getRole().toUpperCase()));
-        return grantedAuthorities;
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        Set<UserRole> userRole = new HashSet<>();
+        userRole.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
+        return authorities;
     }
 
     @Override
@@ -55,9 +56,5 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public Users getUserDetails(){
-        return users;
     }
 }

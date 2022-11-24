@@ -1,10 +1,16 @@
 package com.demoappfeky;
 
+import com.demoappfeky.configuration.SecurityUtility;
 import com.demoappfeky.model.Users;
+import com.demoappfeky.model.security.Role;
+import com.demoappfeky.model.security.UserRole;
 import com.demoappfeky.services.userServices.UsersServices;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootApplication
 public class DemoAppFekyApplication implements CommandLineRunner {
@@ -20,14 +26,19 @@ public class DemoAppFekyApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Users users = new Users();
+        Users user = new Users();
 
-        users.setFirstName("admin");
-        users.setLastName("user");
-        users.setUserName("adminUser");
-        users.setPassword("password");
-        users.setRole("admin");
+        user.setUserName("admin");
+        user.setFirstName("Admin");
+        user.setLastName("Portal");
+        user.setPassword(SecurityUtility.passwordEncoder().encode("password"));
+        user.setEmail("admin@gmail.com");
+        Set<UserRole> userRoles = new HashSet<>();
+        Role role1 = new Role();
+        role1.setRoleId(1);
+        role1.setName("ROLE_ADMIN");
+        userRoles.add(new UserRole(user, role1));
 
-        usersServices.createUser(users);
+        usersServices.createUser(user, userRoles);
     }
 }

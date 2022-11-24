@@ -1,9 +1,13 @@
 package com.demoappfeky.model;
 
+import com.demoappfeky.model.security.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -12,26 +16,20 @@ import javax.persistence.*;
 public class Users {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false, updatable = false)
+    private Long id;
+    private String userName;
+    private String password;
     private String firstName;
     private String lastName;
-    private String userName;
+
+    @Column(name = "email", nullable = false, updatable = false)
     private String email;
-    private String password;
-    private String role;
+    private String phone;
+    private boolean enabled = true;
 
-    public Users(long id, String firstName, String lastName, String userName, String email, String password, String role) {
-        super();
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
-
-    public Users() {}
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<UserRole> userRole = new HashSet<>();
 }
