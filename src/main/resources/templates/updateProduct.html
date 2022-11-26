@@ -3,234 +3,137 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
       xmlns:sec="http://www.w3.org/1999/xhtml">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AdminPortal</title>
-    <!-- BOOTSTRAP STYLES-->
-    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
-    <!-- FONTAWESOME STYLES-->
-    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" />
-    <!-- MORRIS CHART STYLES-->
-    <link th:href="@{/js/morris/morris-0.4.3.min.css}" rel="stylesheet" />
-    <!-- CUSTOM STYLES-->
-    <link th:href="@{/css/custom.css}" rel="stylesheet" />
-    <!-- GOOGLE FONTS-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-
-    <script src="https://cdn.tiny.cloud/1/ahftfxfwv5zd87u0l2vgbzaf500wblxdodgqy69udy4i2z05/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-</head>
+<head th:insert="fragments.html :: head"></head>
 
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" th:href="@{/}">Admin</a>
-            </div>
-            <div style="color: white;
-padding: 15px 50px 5px 50px;
-float: right;
-font-size: 16px;"><a th:href="@{/logout}" class="btn btn-danger square-btn-adjust">Logout</a>
-            </div>
-        </nav>
-        <!-- /. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-                    <li class="text-center">
-                        <img th:src="@{/img/find_user.png}" class="user-image img-responsive" />
-                    </li>
-
-
-                    <li>
-                        <a th:href="@{/}"><i class="fa fa-dashboard fa-2x"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a><i class="fa fa-bar-chart-o fa-2x"></i>Reports</a>
-                    </li>
-                    <li>
-                        <a><i class="fa fa-table fa-2x"></i>Users</a>
-                    </li>
-                    <li>
-                        <a><i class="fa fa-table fa-2x"></i>Order History</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap fa-2x"></i> Inventory<span
-                                class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a th:href="@{/product/productsList}"><i class="fa fa-table fa-2x"></i>Products List</a>
-                            </li>
-                            <li>
-                                <a th:href="@{/product/addProduct}"><i class="fa fa-edit fa-2x"></i> Add Product </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-file fa-2x"></i> Categories<span
-                                class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a th:href="@{/categories/categoriesList}"><i class="fa fa-table fa-2x"></i>Categories List</a>
-                            </li>
-                            <li>
-                                <a th:href="@{/categories/new}"><i class="fa fa-edit fa-2x"></i> Add Category </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-
-            </div>
-
-        </nav>
+        <header th:insert="fragments.html :: header"></header>
+        <!--    Nav-->
+        <div th:insert="fragments.html :: nav"></div>
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper">
-            <div id="page-inner">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2>Update your product</h2>
-                    </div>
+        <div id="content-wrapper" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Update your product</h2>
                 </div>
-                <!-- /. ROW  -->
-                <hr />
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Form Elements -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Form Element Examples
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h3>Basic Form Examples</h3>
-                                        <form role="form"  style="width: 75%;" th:action="@{/product/updateProduct}" th:object="${book}" method="post"
-                                              enctype="multipart/form-data">
-                                            <input hidden="hidden" name="id" th:value="${book.id}" th:field="*{id}"/>
-                                            <div class="form-group">
-                                                <label>Tittle</label>
-                                                <input class="form-control" placeholder="Please enter product name" th:field="*{tittle}"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Publisher</label>
-                                                <input class="form-control" placeholder="Please enter Publisher name" th:field="*{publisher}"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Publication Date</label>
-                                                <input type="date" class="form-control" id="publicationDate"
-                                                       name="publicationDate" th:value="${book.publicationDate}"
-                                                       placeholder="publication Date" style="width: 25%;"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Shipping Weight</label>
-                                                <input th:field="*{shippingWeight}" type="number" step="0.01"
-                                                       class="form-control" placeholder="Shipping Weight"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>List Price</label>
-                                                <input th:field="*{listPrice}" type="number" step="0.01"
-                                                       class="form-control" placeholder="Please enter list price" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Our Price</label>
-                                                <input th:field="*{ourPrice}" type="number" step="0.01"
-                                                       class="form-control" placeholder="Please enter our price" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Number in Stock</label>
-                                                <input th:field="*{inStockNumber}" type="number"
-                                                       class="form-control" placeholder="Please enter number in stock" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Discription</label>
-                                                <textarea rows="5" class="form-control" th:field="*{description}"
-                                                          placeholder="Description"></textarea>
-                                            </div>
-                                            <!-- <div class="form-group">
-                                                <label>Inline Checkboxes Examples</label>
-                                                <label class="checkbox-inline">
-                                                    <input type="checkbox" /> One
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Form Elements -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Form Element Examples
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>Basic Form Examples</h3>
+                                    <form role="form"  style="width: 75%;" th:action="@{/product/updateProduct}" th:object="${book}" method="post"
+                                          enctype="multipart/form-data">
+                                        <input hidden="hidden" name="id" th:value="${book.id}" th:field="*{id}"/>
+                                        <div class="form-group">
+                                            <label>Tittle</label>
+                                            <input class="form-control" placeholder="Please enter product name" th:field="*{tittle}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Publisher</label>
+                                            <input class="form-control" placeholder="Please enter Publisher name" th:field="*{publisher}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Publication Date</label>
+                                            <input type="date" class="form-control" id="publicationDate"
+                                                   name="publicationDate" th:value="${book.publicationDate}"
+                                                   placeholder="publication Date" style="width: 25%;"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Shipping Weight</label>
+                                            <input th:field="*{shippingWeight}" type="number" step="0.01"
+                                                   class="form-control" placeholder="Shipping Weight"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>List Price</label>
+                                            <input th:field="*{listPrice}" type="number" step="0.01"
+                                                   class="form-control" placeholder="Please enter list price" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Our Price</label>
+                                            <input th:field="*{ourPrice}" type="number" step="0.01"
+                                                   class="form-control" placeholder="Please enter our price" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Number in Stock</label>
+                                            <input th:field="*{inStockNumber}" type="number"
+                                                   class="form-control" placeholder="Please enter number in stock" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Discription</label>
+                                            <textarea rows="5" class="form-control" th:field="*{description}"
+                                                      placeholder="Description"></textarea>
+                                        </div>
+                                        <!-- <div class="form-group">
+                                            <label>Inline Checkboxes Examples</label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" /> One
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" /> Two
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" /> Three
+                                            </label>
+                                        </div> -->
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <div class="radio">
+                                                <label>
+                                                    <input value="true" type="radio" name="active"
+                                                           checked="checked" />Active
                                                 </label>
-                                                <label class="checkbox-inline">
-                                                    <input type="checkbox" /> Two
-                                                </label>
-                                                <label class="checkbox-inline">
-                                                    <input type="checkbox" /> Three
-                                                </label>
-                                            </div> -->
-                                            <div class="form-group">
-                                                <label>Status</label>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input value="true" type="radio" name="active"
-                                                               checked="checked" />Active
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input value="false" type="radio" name="active" />DisActive
-                                                    </label>
-                                                </div>
                                             </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input value="false" type="radio" name="active" />DisActive
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
 
                                             <div class="form-group">
-
-                                                <div class="form-group">
-                                                    <label>Category</label>
-                                                    <select th:field="*{category}" th:value="${book.category}" class="form-control" required>
-                                                        <option value="" selected="selected">Please
-                                                            select an option...</option>
-                                                        <th:block th:each="cat : ${listCategories}">
-                                                            <option th:text="${cat.name}" th:value="${cat.id}"></option>
-                                                        </th:block>
-                                                    </select>
-                                                    <br/>
-                                                    <label>Add Image</label>
-                                                    <input type="file" name="bookImage" id="bookImage" accept="image/png, image/jpeg" required/>
-                                                </div>
+                                                <label>Category</label>
+                                                <select th:field="*{category}" th:value="${book.category}" class="form-control" required>
+                                                    <option value="" selected="selected">Please
+                                                        select an option...</option>
+                                                    <th:block th:each="cat : ${listCategories}">
+                                                        <option th:text="${cat.name}" th:value="${cat.id}"></option>
+                                                    </th:block>
+                                                </select>
+                                                <br/>
+                                                <label>Add Image</label>
+                                                <input type="file" name="bookImage" id="bookImage" accept="image/png, image/jpeg" required/>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Update Product</button>
-<!--                                            <button class="btn btn-danger" th:href="@{/}">Cancel</button>-->
-                                        </form>
-                                        <br />
-                                    </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Update Product</button>
+                                        <!--                                            <button class="btn btn-danger" th:href="@{/}">Cancel</button>-->
+                                    </form>
+                                    <br />
                                 </div>
                             </div>
                         </div>
-                        <!-- End Form Elements -->
                     </div>
+                    <!-- End Form Elements -->
                 </div>
-                <!-- /. ROW  -->
             </div>
+            <!-- /. ROW  -->
             <!-- /. PAGE INNER  -->
         </div>
         <!-- /. PAGE WRAPPER  -->
     </div>
     <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
-    <!-- JQUERY SCRIPTS -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
-    <!-- BOOTSTRAP SCRIPTS -->
-    <script src="assets/js/bootstrap.min.js"></script>
-    <!-- METISMENU SCRIPTS -->
-    <script src="assets/js/jquery.metisMenu.js"></script>
-    <!-- CUSTOM SCRIPTS -->
-    <script src="assets/js/custom.js"></script>
-
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-            toolbar_mode: 'floating',
-        });
-    </script>
-
+    <div th:insert="fragments.html :: script"></div>
 </body>
 
 </html>

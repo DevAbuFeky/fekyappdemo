@@ -1,49 +1,103 @@
-<!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml"></html>
+<!DOCTYPE html>
 <html lang="en">
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
-	  xmlns:sec="http://www.w3.org/1999/xhtml">
 
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Login</title>
-	<!-- BOOTSTRAP STYLES-->
-	<link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
-	<!-- FONTAWESOME STYLES-->
-	<link th:href="@{/css/font-awesome.css}" rel="stylesheet" />
-	<!-- MORRIS CHART STYLES-->
-	<link th:href="@{/js/morris/morris-0.4.3.min.css}" rel="stylesheet" />
-	<!-- CUSTOM STYLES-->
-<!--	<link th:href="@{/css/custom.css}" rel="stylesheet" />-->
-	<link th:href="@{/css/login.css}" rel="stylesheet" />
-	<!-- GOOGLE FONTS-->
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-</head>
-<body class="login-bg">
-		<div class="login-body">
-			<div>
-				<h2 class="form-signin-heading" style="text-align: center;">Register</h2>
-			</div>
-			<div class="container login-info">
-				<div class="bg-danger" th:if="${param.error}">Username or Email Exists</div>
-				<form th:action="@{/register}" class="form-signin" method="post" role="form">
-					<input type="text" class="form-control user" placeholder="First Name" name="firstName" id="firstName" required="required"
-						autofocus="autofocus">
-					<input type="text" class="form-control user" placeholder="Last Name" name="lastName" id="lastName" required="required"
-						   autofocus="autofocus">
-					<input type="text" class="form-control user" placeholder="Username" name="username" id="username" required="required"
-						   autofocus="autofocus">
-					<input type="email" class="form-control user" placeholder="Email" name="email" id="email" required="required"
-						   autofocus="autofocus">
-					<input type="password" class="form-control" placeholder="Password" name="password" id="password" required="required">
-					<input class="btn btn-lg btn-primary btn-block" type="submit" name="Sign In" value="Login">
-					<hr>
-				</form>
-			</div>
-		</div>
-		<div class="copyright login-copyright">
-           <p class="form-signin-heading" style="text-align: center;">© 2021 Admin Panel . All Rights Reserved .</p>
-		</div>
+<head th:insert="fragments.html :: head"></head>
+
+<body>
+
+  <main>
+    <div class="container">
+
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+              <div class="d-flex justify-content-center py-4">
+                <a href="register.html" class="logo d-flex align-items-center w-auto">
+                  <span class="d-none d-lg-block">Register</span>
+                </a>
+              </div><!-- End Logo -->
+
+              <div class="card mb-3">
+
+                <div class="card-body">
+
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                    <p class="text-center small">Enter your personal details to create account</p>
+                  </div>
+
+                  <form class="row g-3 needs-validation" novalidate>
+                    <div class="col-12">
+                      <label for="firstName" class="form-label">First Name</label>
+                      <input type="text" name="name" class="form-control" id="firstName" required>
+                      <div class="invalid-feedback">Please, enter your name!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="lastName" class="form-label">Last Name</label>
+                      <input type="text" name="name" class="form-control" id="lastName" required>
+                      <div class="invalid-feedback">Please, enter your name!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="email" class="form-label">Your Email</label>
+                      <input type="email" name="email" class="form-control" id="email" required>
+                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="userName" class="form-label">Username</label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                        <input type="text" name="username" class="form-control" id="userName" required>
+                        <div class="invalid-feedback">Please choose a username.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" name="password" class="form-control" id="password" required>
+                      <div class="invalid-feedback">Please enter your password!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
+                        <div class="invalid-feedback">You must agree before submitting.</div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                    </div>
+                    <div class="col-12">
+                      <p class="small mb-0">Already have an account? <a href="login.html">Log in</a></p>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+
+              <div class="credits">
+                Designed by <a href="#">Feky App</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <div th:insert="fragments.html :: script"></div>
+
 </body>
+
 </html>
