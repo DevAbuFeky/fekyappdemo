@@ -1,15 +1,16 @@
 package com.demoappfeky.services.userServices;
 
 import com.demoappfeky.model.Users;
+import com.demoappfeky.model.security.PasswordResetToken;
 import com.demoappfeky.model.security.UserRole;
+import com.demoappfeky.repository.userRepo.PasswordResetTokenRepository;
 import com.demoappfeky.repository.userRepo.RoleRepository;
 import com.demoappfeky.repository.userRepo.UsersRepo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -23,12 +24,17 @@ public class UsersServices {
     private final UsersRepo usersRepo;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
+
+    private final PasswordResetTokenRepository passwordResetTokenRepository;
+
+
     private static final Logger LOG = LoggerFactory.getLogger(UsersServices.class);
 
-    public UsersServices(UsersRepo usersRepo, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
+    public UsersServices(UsersRepo usersRepo, PasswordEncoder passwordEncoder, RoleRepository roleRepository, PasswordResetTokenRepository passwordResetTokenRepository) {
         this.usersRepo = usersRepo;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
+        this.passwordResetTokenRepository = passwordResetTokenRepository;
     }
 
 
@@ -51,23 +57,13 @@ public class UsersServices {
         return usersRepo.save(user);
     }
 
-    public Users registerUser(String userName ,String email , String firstName,String lastName, String password){
-        if (userName == null || password == null) {
-            return null;
-        } else {
-            if (usersRepo.findByUserName(userName) != null){
-                System.out.println("Duplicate Username");
-                return null;
-            }
-            Users users = new Users();
-            users.setUserName(userName);
-            users.setEmail(email);
-            users.setFirstName(firstName);
-            users.setLastName(lastName);
-            users.setPassword(password);
+    public PasswordResetToken getPasswordResetToken(final String token){
+        return passwordResetTokenRepository.findByToken(token);
+    }
 
-            return usersRepo.save(users);
-        }
+    public void createPasswordResetTokenForUser(final Users user, final String token){
+        final PasswordResetToken myToken = new PasswordResetToken(token, user);
+        passwordResetTokenRepository.save(myToken);
     }
 
 //    public Users authenticate(String username, String password){

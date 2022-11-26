@@ -1,6 +1,7 @@
 package com.demoappfeky.configuration;
 
 import com.demoappfeky.services.userServices.UsersDetailsServiceImpl;
+import com.demoappfeky.utality.SecurityUtility;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -47,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/img/**",
             "/vendor/**",
 //            "/",
-            "/newUser",
+            "/register",
             "/forgetPassword",
             "/login",
             "/images/**",

@@ -23,6 +23,10 @@ public class Users {
     private String password;
     private String firstName;
     private String lastName;
+    private String address;
+    private String company;
+    private String job;
+    private String country;
 
     @Column(name = "email", nullable = false, updatable = false)
     private String email;

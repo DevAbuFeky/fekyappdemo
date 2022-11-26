@@ -9,7 +9,7 @@
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-        <div class="container">
+        <div class="container" th:classappend="${classActiveNewAccount}? 'in active'">
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
@@ -28,7 +28,7 @@
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form class="row g-3 needs-validation" novalidate th:action="@{/newUser}" method="post">
                     <div class="col-12">
                       <label for="firstName" class="form-label">First Name</label>
                       <input type="text" name="name" class="form-control" id="firstName" required>
@@ -43,22 +43,30 @@
 
                     <div class="col-12">
                       <label for="email" class="form-label">Your Email</label>
+                      <span style="color: red;" th:if="${emailExists}">Email already exists. Choose a different one.</span>
                       <input type="email" name="email" class="form-control" id="email" required>
-                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                      <div class="invalid-feedback">Please enter a valid Email address!</div>
                     </div>
 
                     <div class="col-12">
-                      <label for="userName" class="form-label">Username</label>
+                      <label for="newUsername" class="form-label">Username</label>
+                      &nbsp;<span style="color: red;" th:if="${usernameExists}">Username already exists. Choose a different one.</span>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="userName" required>
+                        <input type="text" name="username" class="form-control" id="newUsername" required>
                         <div class="invalid-feedback">Please choose a username.</div>
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="password" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="password" required>
+                      <label for="txtNewPassword" class="form-label">Password</label>
+                      <input type="password" name="password" class="form-control" id="txtNewPassword" required>
+                      <div class="invalid-feedback">Please enter your password!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="txtConfirmPassword" class="form-label">Re-enter New Password</label>
+                      <input type="password" name="password" class="form-control" id="txtConfirmPassword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
@@ -73,7 +81,7 @@
                       <button class="btn btn-primary w-100" type="submit">Create Account</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Already have an account? <a href="login.html">Log in</a></p>
+                      <p class="small mb-0">Already have an account? <a th:href="@{/login}">Log in</a></p>
                     </div>
                   </form>
 

@@ -1,6 +1,6 @@
 package com.demoappfeky.controller;
 
-import com.demoappfeky.configuration.FileUploadUtil;
+import com.demoappfeky.utality.FileUploadUtil;
 import com.demoappfeky.model.Book;
 import com.demoappfeky.model.Category;
 import com.demoappfeky.repository.productRepo.CategoryRepository;

@@ -1,6 +1,6 @@
 package com.demoappfeky;
 
-import com.demoappfeky.configuration.SecurityUtility;
+import com.demoappfeky.utality.SecurityUtility;
 import com.demoappfeky.model.Users;
 import com.demoappfeky.model.security.Role;
 import com.demoappfeky.model.security.UserRole;

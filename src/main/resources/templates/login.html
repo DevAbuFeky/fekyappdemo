@@ -23,13 +23,12 @@
 
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                    <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
 <!--                  Error msgs -->
-                  <div class="bg-danger" th:if="${param.error}">Invalid username
+                  <div th:if="${param.error}" style="text-align: center; color: #e03e2d">Invalid username
                     and password.</div>
-                  <div class="bg-danger" th:if="${param.logout}">You have been
+                  <div th:if="${param.logout}" style="text-align: center ; color: #0a53be">You have been
                     logged out.</div>
 
                   <form class="row g-3 needs-validation" novalidate th:action="@{/login}" method="post" role="form">
@@ -59,7 +58,7 @@
                       <button class="btn btn-primary w-100" type="submit" value="Login">Login</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Don't have account? <a href="register.html">Create an account</a></p>
+                      <p class="small mb-0">Don't have account? <a th:href="@{/register}">Create an account</a></p>
                     </div>
                   </form>
 

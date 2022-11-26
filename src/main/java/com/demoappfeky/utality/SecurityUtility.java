@@ -1,4 +1,4 @@
-package com.demoappfeky.configuration;
+package com.demoappfeky.utality;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

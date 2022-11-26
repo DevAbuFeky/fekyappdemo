@@ -1,48 +1,48 @@
 package com.demoappfeky.controller;
 
-import com.demoappfeky.configuration.SecurityUtility;
 import com.demoappfeky.model.Users;
-import com.demoappfeky.services.userServices.UsersDetailsServiceImpl;
 import com.demoappfeky.services.userServices.UsersServices;
+import com.demoappfeky.utality.SecurityUtility;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.Optional;
 
 @Controller
-public class AccountController {
+public class ProfileController {
 
     private final UsersServices usersServices;
+    private final UserDetailsService userDetailsService;
 
-    private final UsersDetailsServiceImpl usersDetailsService;
-
-    public AccountController(UsersServices usersServices, UsersDetailsServiceImpl usersDetailsService) {
+    public ProfileController(UsersServices usersServices, UserDetailsService userDetailsService) {
         this.usersServices = usersServices;
-        this.usersDetailsService = usersDetailsService;
+        this.userDetailsService = userDetailsService;
     }
 
-    @RequestMapping("/account")
+    @GetMapping("/profile")
     public String myProfile(Model model, Principal principal){
         Users user = usersServices.findByUserName(principal.getName());
         model.addAttribute("user", user);
-
         model.addAttribute("classActiveEdit", true);
 
-        return "account";
+        return "profile/users-profile";
 
     }
 
-    @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
-    public String updateUserInfo (@ModelAttribute("user") Users user, @ModelAttribute("newPassword") String newPassword, Model model) throws Exception{
+    @PostMapping( "/profile")
+    public String updateUserInfo (@ModelAttribute("user") Users user,
+                                  @ModelAttribute("newPassword") String newPassword,
+                                  Model model) throws Exception{
 
         Optional<Users> currentUser = usersServices.findByUserId(user.getId());
 
@@ -54,9 +54,9 @@ public class AccountController {
 
 //        check email already exists
             if (usersServices.findByUserEmail(user.getEmail()) != null){
-                if (usersServices.findByUserEmail(user.getEmail()).getId() != currentUser.get().getId()){
+                if (!usersServices.findByUserEmail(user.getEmail()).getId().equals(currentUser.get().getId())){
                     model.addAttribute("emailExists", true);
-                    return "account";
+                    return "profile/users-profile";
                 }
             }
 
@@ -64,12 +64,12 @@ public class AccountController {
             if (usersServices.findByUserName(user.getUserName()) != null){
                 if (usersServices.findByUserName(user.getUserName()).getId() != currentUser.get().getId()){
                     model.addAttribute("usernameExists", true);
-                    return "account";
+                    return "profile/users-profile";
                 }
             }
 
-            // update password
-            if (newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")){
+//            // update password
+            if (newPassword != null && !newPassword.isEmpty()){
                 BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
                 String dbPassword = currentUser.get().getPassword();
                 if (passwordEncoder.matches(user.getPassword(), dbPassword)){
@@ -77,7 +77,7 @@ public class AccountController {
                 }else {
                     model.addAttribute("incorrectPassword", true);
 
-                    return "account";
+                    return "profile/users-profile";
                 }
             }
         }
@@ -86,6 +86,11 @@ public class AccountController {
         currentUser.get().setLastName(user.getLastName());
         currentUser.get().setUserName(user.getUserName());
         currentUser.get().setEmail(user.getEmail());
+        currentUser.get().setPhone(user.getPhone());
+        currentUser.get().setAddress(user.getAddress());
+        currentUser.get().setCompany(user.getCompany());
+        currentUser.get().setJob(user.getJob());
+        currentUser.get().setCountry(user.getCountry());
 
         usersServices.save(currentUser.get());
 
@@ -93,13 +98,14 @@ public class AccountController {
         model.addAttribute("user", currentUser.get());
         model.addAttribute("classActiveEdit",true);
 
-
-        UserDetails userDetails = usersDetailsService.loadUserByUsername(currentUser.get().getUserName());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(currentUser.get().getUserName());
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return "account";
+        return "profile/users-profile";
     }
 }
+
+
