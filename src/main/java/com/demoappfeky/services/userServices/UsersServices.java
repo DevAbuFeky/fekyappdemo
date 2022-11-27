@@ -2,10 +2,12 @@ package com.demoappfeky.services.userServices;
 
 import com.demoappfeky.model.Users;
 import com.demoappfeky.model.security.PasswordResetToken;
+import com.demoappfeky.model.security.Role;
 import com.demoappfeky.model.security.UserRole;
 import com.demoappfeky.repository.userRepo.PasswordResetTokenRepository;
 import com.demoappfeky.repository.userRepo.RoleRepository;
 import com.demoappfeky.repository.userRepo.UsersRepo;
+import com.demoappfeky.utality.SecurityUtility;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -65,10 +68,6 @@ public class UsersServices {
         final PasswordResetToken myToken = new PasswordResetToken(token, user);
         passwordResetTokenRepository.save(myToken);
     }
-
-//    public Users authenticate(String username, String password){
-//        return usersRepo.findByUserNameAndPassword(username,password).orElse(null);
-//    }
 
     //to create local user using commandLineRunner
     @Transactional

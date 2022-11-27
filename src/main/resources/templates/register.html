@@ -8,7 +8,8 @@
   <main>
     <div class="container">
 
-      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4"
+               th:classappend="${classActiveNewAccount}? 'active'">
         <div class="container" th:classappend="${classActiveNewAccount}? 'in active'">
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
@@ -28,32 +29,33 @@
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate th:action="@{/newUser}" method="post">
+                  <form class="row g-3 needs-validation" novalidate th:action="@{/register}" method="post">
                     <div class="col-12">
                       <label for="firstName" class="form-label">First Name</label>
-                      <input type="text" name="name" class="form-control" id="firstName" required>
+                      <input type="text" name="firstName" class="form-control" id="firstName" required>
                       <div class="invalid-feedback">Please, enter your name!</div>
                     </div>
 
                     <div class="col-12">
                       <label for="lastName" class="form-label">Last Name</label>
-                      <input type="text" name="name" class="form-control" id="lastName" required>
+                      <input type="text" name="lastName" class="form-control" id="lastName" required>
                       <div class="invalid-feedback">Please, enter your name!</div>
                     </div>
 
                     <div class="col-12">
                       <label for="email" class="form-label">Your Email</label>
-                      <span style="color: red;" th:if="${emailExists}">Email already exists. Choose a different one.</span>
                       <input type="email" name="email" class="form-control" id="email" required>
+                      <span style="color: red;" th:if="${emailExists}">Email already exists. Choose a different one.</span>
                       <div class="invalid-feedback">Please enter a valid Email address!</div>
                     </div>
 
                     <div class="col-12">
-                      <label for="newUsername" class="form-label">Username</label>
-                      &nbsp;<span style="color: red;" th:if="${usernameExists}">Username already exists. Choose a different one.</span>
+                      <label for="userName" class="form-label">Username</label>
+                      &nbsp;
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="newUsername" required>
+                        <input type="text" name="userName" class="form-control" id="userName" required>
+                        <span style="color: red;" th:if="${usernameExists}">Username already exists. Choose a different one.</span>
                         <div class="invalid-feedback">Please choose a username.</div>
                       </div>
                     </div>
@@ -70,13 +72,13 @@
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
-                        <div class="invalid-feedback">You must agree before submitting.</div>
-                      </div>
-                    </div>
+<!--                    <div class="col-12">-->
+<!--                      <div class="form-check">-->
+<!--                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>-->
+<!--                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>-->
+<!--                        <div class="invalid-feedback">You must agree before submitting.</div>-->
+<!--                      </div>-->
+<!--                    </div>-->
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Create Account</button>
                     </div>
