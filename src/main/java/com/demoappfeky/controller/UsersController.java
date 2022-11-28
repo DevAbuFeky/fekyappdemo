@@ -13,17 +13,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class UsersController {
@@ -125,6 +119,61 @@ public class UsersController {
         model.addAttribute("usersList", usersList);
         return "users/usersList";
 
+    }
+    @GetMapping("/updateUser/{id}")
+    public String updateImplants(@PathVariable long id, Model model){
+        Optional<Users> user = usersServices.findByUserId(id);
+        if (user.isPresent()){
+            model.addAttribute("user", user.get());
+            return "users/usersList";
+        }else {
+            return "404";
+        }
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteImplants(@PathVariable long id){
+        usersServices.removeUserById(id);
+        return "users/usersList";
+    }
+
+    @PostMapping("/createUser")
+    public String createNewUser(@ModelAttribute("email") String userEmail,
+                                @ModelAttribute("userName") String userName,
+                                @ModelAttribute("firstName") String firstName,
+                                @ModelAttribute("lastName") String lastName,
+                                @ModelAttribute("password") String password,
+                                Model model) throws Exception{
+
+        model.addAttribute("email",userEmail);
+        model.addAttribute("userName", userName);
+
+        if (usersServices.findByUserEmail(userEmail) != null){
+            model.addAttribute("emailExists", true);
+
+            return "users/usersList";
+        }
+
+        if (usersServices.findByUserName(userName) != null){
+            model.addAttribute("usernameExists", true);
+
+            return "users/usersList";
+        }
+
+        Users user = new Users();
+        user.setUserName(userName);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(userEmail);
+        user.setPassword(SecurityUtility.passwordEncoder().encode(password));
+
+        Role role = new Role();
+        role.setRoleId(2);
+        role.setName("ROLE_USER");
+        Set<UserRole> userRoles = new HashSet<>();
+        userRoles.add(new UserRole(user,role));
+        usersServices.createUser(user, userRoles);
+        return "users/usersList";
     }
 
 }

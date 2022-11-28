@@ -39,7 +39,9 @@ public class ProfileController {
 
     }
 
-    @PostMapping( "/profile")
+
+
+    @PostMapping( "/updateUserInfo")
     public String updateUserInfo (@ModelAttribute("user") Users user,
                                   @ModelAttribute("newPassword") String newPassword,
                                   Model model) throws Exception{
@@ -68,7 +70,7 @@ public class ProfileController {
                 }
             }
 
-//            // update password
+            // update password
             if (newPassword != null && !newPassword.isEmpty()){
                 BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
                 String dbPassword = currentUser.get().getPassword();

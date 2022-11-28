@@ -40,7 +40,6 @@ public class UsersServices {
         this.passwordResetTokenRepository = passwordResetTokenRepository;
     }
 
-
     public List<Users> findAllUsers(){
         return usersRepo.findAll();
     }
@@ -54,6 +53,10 @@ public class UsersServices {
     }
     public Users findByUserEmail(String userEmail){
         return usersRepo.findByEmail(userEmail);
+    }
+
+    public void removeUserById(Long id){
+        usersRepo.deleteById(id);
     }
 
     public Users save(Users user){
