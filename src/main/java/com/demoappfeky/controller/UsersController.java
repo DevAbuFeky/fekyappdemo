@@ -125,7 +125,7 @@ public class UsersController {
         Optional<Users> user = usersServices.findByUserId(id);
         if (user.isPresent()){
             model.addAttribute("user", user.get());
-            return "users/usersList";
+            return "users/addUser";
         }else {
             return "404";
         }
@@ -151,13 +151,13 @@ public class UsersController {
         if (usersServices.findByUserEmail(userEmail) != null){
             model.addAttribute("emailExists", true);
 
-            return "users/usersList";
+            return "users/addUser";
         }
 
         if (usersServices.findByUserName(userName) != null){
             model.addAttribute("usernameExists", true);
 
-            return "users/usersList";
+            return "users/addUser";
         }
 
         Users user = new Users();
