@@ -39,7 +39,7 @@
                                         <th scope="col">Last Name</th>
                                         <th scope="col">Username</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">##</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -50,8 +50,7 @@
                                         <td th:text="${user.userName}" class="text-primary"></td>
                                         <td th:text="${user.email}" class="text-primary"></td>
 
-                                        <td><a href="" th:href="@{/addUser/{id}(id=${user.id})}"
-                                               data-bs-toggle="modal" data-bs-target="#updateUser">
+                                        <td><a href="" th:href="@{/updateUser/{id}(id=${user.id})}">
                                             <span class="ri-edit-box-line"></span></a>
                                             <a href="" th:href="@{/delete/{id}(id=${user.id})}" data-bs-toggle="modal" data-bs-target="#deleteUser">
                                             <span class=" ri-delete-bin-5-fill"></span></a></td>
