@@ -136,7 +136,11 @@ public class UsersController {
         usersServices.removeUserById(id);
         return "users/usersList";
     }
-
+    @GetMapping("/createUser")
+    public String getCreateNewUser(Model model){
+        model.addAttribute("user", new Users());
+        return "users/addUser";
+    }
     @PostMapping("/createUser")
     public String createNewUser(@ModelAttribute("email") String userEmail,
                                 @ModelAttribute("userName") String userName,
