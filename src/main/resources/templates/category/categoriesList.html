@@ -6,17 +6,18 @@
 <header th:insert="fragments.html :: header"></header>
 <!-- ======= Sidebar ======= -->
 <div th:insert="fragments.html :: nav"></div>
+
 <main id="main" class="main">
 
     <div th:if="${message != null}"
          class="alert alert-success text-center">[[${message}]]</div>
 
     <div class="pagetitle">
-        <h1>Products List</h1>
+        <h1>Categories List</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
-                <li class="breadcrumb-item active">Products List</li>
+                <li class="breadcrumb-item active">Categories List</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -28,43 +29,30 @@
                 <div class="row">
                     <!-- Users List -->
                     <div class="col-12">
-                        <a class="btn btn-primary" th:href="@{/addProduct}">
-                            New Product
+                        <a class="btn btn-primary" th:href="@{/new}">
+                            New Category
                         </a>
                         <div class="card recent-sales overflow-auto">
                             <div class="card-body">
-                                <h5 class="card-title">Users</h5>
+                                <h5 class="card-title">Categories</h5>
                                 <table class="table table-borderless datatable">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Tittle</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">List Price</th>
-                                        <th scope="col">Active</th>
-                                        <th scope="col">##</th>
+                                        <th scope="col">Name</th>
                                         <th scope="col">##</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="book, iStat : ${bookList}">
-                                        <th name="id" th:text="${book.id}"></th>
-                                        <td th:text="${book.tittle}" class="text-primary"></td>
-                                        <td th:text="${book.category.name}" class="text-primary"></td>
-                                        <td th:text="${book.listPrice}" class="text-primary"></td>
-                                        <td th:text="${book.ourPrice}" class="text-primary"></td>
-                                        <td th:text="${book.active}" class="text-primary"></td>
+                                    <tr th:each="category, iStat : ${categoriesList}">
+                                        <th name="id" th:text="${category.id}"></th>
+                                        <td th:text="${category.name}" class="text-primary"></td>
 
-                                        <td>
-                                            <input hidden="hidden" name="id" th:value="${book.id}"/>
-                                            <button th:id="'oneBook-'+${book.id}" class="btn btn-danger btn-xs delete-book" type="submit" value="delete" >
-                                                <span class="fa fa-times"></span>Delete</button>
-                                        </td>
-
-                                        <td><a href="" th:href="@{/updateProduct?id=}+${book.id}">
+                                        <td><a href="" th:href="@{/updateCategory/{id}(id=${category.id})}">
                                             <span class="ri-edit-box-line"></span></a>
-<!--                                            <a href="" th:href="@{/delete/{id}(id=${user.id})}" data-bs-toggle="modal" data-bs-target="#deleteUser">-->
-<!--                                            <span class=" ri-delete-bin-5-fill"></span></a></td>-->
+                                            <a href="" th:href="@{/removeCategory/{id}(id=${category.id})}" data-bs-toggle="modal" data-bs-target="#deleteUser">
+                                            <span class=" ri-delete-bin-5-fill"></span></a>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

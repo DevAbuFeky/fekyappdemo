@@ -13,12 +13,12 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Add User</h1>
+        <h1>Update User</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
                 <li class="breadcrumb-item"><a th:href="@{/users}">Users</a></li>
-                <li class="breadcrumb-item active">Add User</li>
+                <li class="breadcrumb-item active">Update User</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <h5 class="card-title"></h5>
                         <!-- No Labels Form -->
-                        <form class="row g-3" th:action="@{/createUser}" method="post" th:object="${user}">
+                        <form class="row g-3" th:action="@{/updateUser}" method="post" th:object="${user}">
                             <input type="hidden" name="id"  th:field="*{id}">
                             <div class="col-md-6">
                                 <input type="text" class="form-control" th:field="*{firstName}" placeholder="First Name">

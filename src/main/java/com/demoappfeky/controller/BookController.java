@@ -21,7 +21,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/product")
 public class BookController {
 
     private final BookService bookService;
@@ -39,7 +38,7 @@ public class BookController {
         model.addAttribute("book", book);
         model.addAttribute("listCategories", listCategories);
 
-        return "addProduct";
+        return "product/addProduct";
     }
 
     @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
@@ -63,7 +62,7 @@ public class BookController {
 
         redirectAttributes.addFlashAttribute("message", "The Product has been saved successfully.");
 
-        return "redirect:productsList";
+        return "redirect:/productsList";
     }
 
     @RequestMapping("/productDetails")
@@ -74,7 +73,7 @@ public class BookController {
             System.out.println(book.get().getId());
             model.addAttribute("book", book.get());
 
-            return "productDetails";
+            return "product/productDetails";
         } else {
             throw new Exception("book not found");
         }
@@ -89,7 +88,7 @@ public class BookController {
             model.addAttribute("listCategories", listCategories);
             System.out.println(book.get().getId());
             model.addAttribute("book", book.get());
-            return "updateProduct";
+            return "product/updateProduct";
         } else {
             throw new Exception("Product not found");
         }
@@ -125,7 +124,7 @@ public class BookController {
     public String products(Model model){
         List<Book> bookList = bookService.findAll();
         model.addAttribute("bookList", bookList);
-        return "productsList";
+        return "product/productsList";
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
@@ -134,6 +133,6 @@ public class BookController {
         List<Book> bookList = bookService.findAll();
         model.addAttribute("bookList", bookList);
 
-        return "redirect:/product/productsList";
+        return "redirect:/productsList";
     }
 }

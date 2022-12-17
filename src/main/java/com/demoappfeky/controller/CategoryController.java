@@ -1,19 +1,18 @@
 package com.demoappfeky.controller;
 
 import com.demoappfeky.model.Category;
+import com.demoappfeky.model.Users;
 import com.demoappfeky.repository.productRepo.CategoryRepository;
 import com.demoappfeky.services.productServices.CategoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
-@RequestMapping("/categories")
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
@@ -29,28 +28,40 @@ public class CategoryController {
     public String listCategories(Model model){
         List<Category> categoriesList = categoryRepository.findAll();
         model.addAttribute("categoriesList",categoriesList);
-        return "categoriesList";
+        return "category/categoriesList";
     }
 
     @RequestMapping(value = "/new" ,method = RequestMethod.GET)
     public String showCategoryNewForm(Model model){
         model.addAttribute("category", new Category());
 
-        return "addCategory";
+        return "category/addCategory";
     }
 
     @RequestMapping(value = "/save" ,method = RequestMethod.POST)
     public String saveCategory(Category category, RedirectAttributes redirectAttributes){
         categoryRepository.save(category);
         redirectAttributes.addFlashAttribute("message", "Category has been saved successfully.");
-        return "redirect:categoriesList";
+        return "redirect:/categoriesList";
     }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    @RequestMapping(value = "/removeCategory", method = RequestMethod.POST)
     public String remove(@ModelAttribute("id") Integer id, Model model){
         categoryService.removeOne(id);
         List<Category> categoriesList = categoryRepository.findAll();
         model.addAttribute("categoriesList", categoriesList);
-        return "redirect:/categories/categoriesList";
+        return "redirect:/categoriesList";
+    }
+
+    @GetMapping("/updateCategory/{id}")
+    public String updateImplants(@PathVariable int id, Model model, RedirectAttributes redirectAttributes){
+        Category category = categoryService.findCategoryById(id);
+        redirectAttributes.addFlashAttribute("message", "Category has been saved successfully.");
+        if (category != null){
+            model.addAttribute("category", category);
+            return "category/addCategory";
+        }else {
+            return "404";
+        }
     }
 }

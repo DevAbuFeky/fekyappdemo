@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -121,8 +122,9 @@ public class UsersController {
 
     }
     @GetMapping("/updateUser/{id}")
-    public String updateImplants(@PathVariable long id, Model model){
+    public String updateImplants(@PathVariable long id, Model model, RedirectAttributes redirectAttributes){
         Optional<Users> user = usersServices.findByUserId(id);
+        redirectAttributes.addFlashAttribute("message", "User has been saved successfully.");
         if (user.isPresent()){
             model.addAttribute("user", user.get());
             return "users/addUser";
@@ -130,7 +132,6 @@ public class UsersController {
             return "404";
         }
     }
-
     @GetMapping("/delete/{id}")
     public String deleteImplants(@PathVariable long id){
         usersServices.removeUserById(id);
@@ -147,7 +148,7 @@ public class UsersController {
                                 @ModelAttribute("firstName") String firstName,
                                 @ModelAttribute("lastName") String lastName,
                                 @ModelAttribute("password") String password,
-                                Model model) throws Exception{
+                                Model model, RedirectAttributes redirectAttributes) throws Exception{
 
         model.addAttribute("email",userEmail);
         model.addAttribute("userName", userName);
@@ -177,7 +178,8 @@ public class UsersController {
         Set<UserRole> userRoles = new HashSet<>();
         userRoles.add(new UserRole(user,role));
         usersServices.createUser(user, userRoles);
-        return "users/usersList";
+        redirectAttributes.addFlashAttribute("message", "User has been saved successfully.");
+        return "redirect:/users";
     }
 
 }

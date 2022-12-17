@@ -13,12 +13,12 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Add User</h1>
+        <h1>Add Category</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
-                <li class="breadcrumb-item"><a th:href="@{/users}">Users</a></li>
-                <li class="breadcrumb-item active">Add User</li>
+                <li class="breadcrumb-item"><a th:href="@{/categoriesList}">Categories</a></li>
+                <li class="breadcrumb-item active">Add Category</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -30,26 +30,14 @@
                     <div class="card-body">
                         <h5 class="card-title"></h5>
                         <!-- No Labels Form -->
-                        <form class="row g-3" th:action="@{/createUser}" method="post" th:object="${user}">
+                        <form class="row g-3" th:action="@{/save}" method="post" th:object="${category}">
                             <input type="hidden" name="id"  th:field="*{id}">
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" th:field="*{firstName}" placeholder="First Name">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" th:field="*{lastName}" placeholder="Last Name">
-                            </div>
-                            <div class="col-6">
-                                <input type="text" class="form-control" th:field="*{userName}" placeholder="Username">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" th:field="*{password}" placeholder="Password">
-                            </div>
                             <div class="col-md-12">
-                                <input type="email" class="form-control" th:field="*{email}" placeholder="Email">
+                                <input type="text" class="form-control" th:field="*{name}" placeholder="Please enter category name">
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a type="button" class="btn btn-secondary" th:href="@{/users}">Cancel</a>
+                                <a type="button" class="btn btn-secondary" th:href="@{/categoriesList}">Cancel</a>
                             </div>
                         </form><!-- End No Labels Form -->
                     </div>
