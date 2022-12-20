@@ -41,9 +41,9 @@
                                         <th scope="col">Tittle</th>
                                         <th scope="col">Category</th>
                                         <th scope="col">List Price</th>
+                                        <th scope="col">Our Price</th>
                                         <th scope="col">Active</th>
-                                        <th scope="col">##</th>
-                                        <th scope="col">##</th>
+                                        <th scope="col"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -58,13 +58,11 @@
                                         <td>
                                             <input hidden="hidden" name="id" th:value="${book.id}"/>
                                             <button th:id="'oneBook-'+${book.id}" class="btn btn-danger btn-xs delete-book" type="submit" value="delete" >
-                                                <span class="fa fa-times"></span>Delete</button>
-                                        </td>
+                                                <span class="ri-delete-bin-2-fill"></span></button>
 
-                                        <td><a href="" th:href="@{/updateProduct?id=}+${book.id}">
-                                            <span class="ri-edit-box-line"></span></a>
-<!--                                            <a href="" th:href="@{/delete/{id}(id=${user.id})}" data-bs-toggle="modal" data-bs-target="#deleteUser">-->
-<!--                                            <span class=" ri-delete-bin-5-fill"></span></a></td>-->
+                                            <a href="" class="btn btn-primary btn-xs delete-book" th:href="@{/updateProduct?id=}+${book.id}">
+                                                <span class="ri-edit-box-line"></span></a>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

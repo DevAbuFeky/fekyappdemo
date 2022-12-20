@@ -34,18 +34,18 @@ public class Book {
     private String description;
     private int inStockNumber;
 
-    @Column(length = 255 )
-    private String logo;
+//    @Column(length = 255 )
+//    private String logo;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @Transient
-    public String getLogoImagePath(){
-        if (logo == null || id == null)
-            return "/image/logo-default.png";
-        return "/image/" + this.id + "/" + this.logo;
-    }
+//    @Transient
+//    public String getLogoImagePath(){
+//        if (logo == null || id == null)
+//            return "/image/logo-default.png";
+//        return "/image/" + this.id + "/" + this.logo;
+//    }
 
 }

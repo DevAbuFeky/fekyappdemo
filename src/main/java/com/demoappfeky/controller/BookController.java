@@ -43,23 +43,25 @@ public class BookController {
 
     @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
     public String addProductPost(@ModelAttribute(name = "book") Book book,
-                                 RedirectAttributes redirectAttributes, @RequestParam("bookImage") MultipartFile multipartFile) throws IOException {
+                                 RedirectAttributes redirectAttributes) throws IOException {
+//                                 @RequestParam("bookImage") MultipartFile multipartFile) throws IOException {
 
-        if (!multipartFile.isEmpty()){
-            String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-            book.setLogo(fileName);
-            Book savedBook = bookService.save(book);
+//        if (!multipartFile.isEmpty()){
+//            String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+//            book.setLogo(fileName);
+//            Book savedBook = bookService.save(book);
+//
+//            String uploadDir = "image/" + savedBook.getId();
+//            FileUploadUtil.cleanDir(uploadDir);
+//            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+//        } else {
+//         if (book.getLogo().isEmpty()){
+//             book.setLogo(null);
+//         }
+//         bookService.save(book);
+//        }
 
-            String uploadDir = "image/" + savedBook.getId();
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        } else {
-         if (book.getLogo().isEmpty()){
-             book.setLogo(null);
-         }
-         bookService.save(book);
-        }
-
+        bookService.save(book);
         redirectAttributes.addFlashAttribute("message", "The Product has been saved successfully.");
 
         return "redirect:/productsList";
@@ -95,26 +97,27 @@ public class BookController {
     }
 
     @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
-    public String updateProductPost(@ModelAttribute("book") Book book, RedirectAttributes redirectAttributes, @RequestParam("bookImage") MultipartFile multipartFile) throws IOException{
+    public String updateProductPost(@ModelAttribute("book") Book book, RedirectAttributes redirectAttributes) throws IOException{
+//                                    @RequestParam("bookImage") MultipartFile multipartFile) throws IOException{
 
 
         bookService.save(book);
 
-        if (!multipartFile.isEmpty()){
-            String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-            book.setLogo(fileName);
-            book.setLogo(fileName);
-            Book savedBook = bookService.save(book);
-
-            String uploadDir = "image/" + savedBook.getId();
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        } else {
-            if (book.getLogo().isEmpty()){
-                book.setLogo(null);
-            }
-            bookService.save(book);
-        }
+//        if (!multipartFile.isEmpty()){
+//            String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+//            book.setLogo(fileName);
+//            book.setLogo(fileName);
+//            Book savedBook = bookService.save(book);
+//
+//            String uploadDir = "image/" + savedBook.getId();
+//            FileUploadUtil.cleanDir(uploadDir);
+//            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+//        } else {
+//            if (book.getLogo().isEmpty()){
+//                book.setLogo(null);
+//            }
+//            bookService.save(book);
+//        }
         redirectAttributes.addFlashAttribute("message", "The Product has been updated successfully.");
 
         return "redirect:/product/productDetails?id=" + book.getId();

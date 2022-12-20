@@ -127,7 +127,7 @@ public class UsersController {
         redirectAttributes.addFlashAttribute("message", "User has been saved successfully.");
         if (user.isPresent()){
             model.addAttribute("user", user.get());
-            return "users/addUser";
+            return "users/updateUser";
         }else {
             return "404";
         }
