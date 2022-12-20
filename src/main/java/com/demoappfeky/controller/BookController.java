@@ -120,7 +120,8 @@ public class BookController {
 //        }
         redirectAttributes.addFlashAttribute("message", "The Product has been updated successfully.");
 
-        return "redirect:/product/productDetails?id=" + book.getId();
+//        return "redirect:/productDetails?id=" + book.getId();
+        return "redirect:/productsList";
     }
 
     @RequestMapping("/productsList")

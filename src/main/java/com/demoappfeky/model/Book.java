@@ -21,10 +21,10 @@ public class Book {
     private String author;
     private String publisher;
     private String publicationDate;
-    private String language;
-    private int numberOfPages;
-    private String format;
-    private int isbn;
+//    private String language;
+//    private int numberOfPages;
+//    private String format;
+//    private int isbn;
     private double shippingWeight;
     private double listPrice;
     private double ourPrice;
