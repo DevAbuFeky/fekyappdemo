@@ -56,7 +56,7 @@ public class CategoryController {
     @GetMapping("/updateCategory/{id}")
     public String updateImplants(@PathVariable int id, Model model, RedirectAttributes redirectAttributes){
         Category category = categoryService.findCategoryById(id);
-        redirectAttributes.addFlashAttribute("message", "Category has been saved successfully.");
+        redirectAttributes.addFlashAttribute("message", "Category has been Updated successfully.");
         if (category != null){
             model.addAttribute("category", category);
             return "category/addCategory";
