@@ -145,22 +145,29 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#products-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Products Controller</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-menu-button-wide"></i><span>Hotels Controller</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="products-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
-                <li class="nav-item">
-                    <a class="nav-link collapse" th:href="@{/productsList}">
-                        <i class="bi bi-grid"></i>
-                        <span>Products List</span>
+                <li>
+                    <a class="nav-link collapse" th:href="@{/hotelsList}">
+                        <i class="bi bi-circle"></i><span>Hotels</span>
                     </a>
-                </li><!-- End Users Nav -->
+                </li><!-- End Hotel Nav -->
+
+<!--                <li class="nav-item">-->
+                <li>
+                    <a class="nav-link collapse" th:href="@{/branchesList}">
+                        <i class="bi bi-grid"></i>
+                        <span>Branches</span>
+                    </a>
+                </li><!-- End Branch Nav -->
 
                 <li>
-                    <a class="nav-link collapse" th:href="@{/categoriesList}">
-                        <i class="bi bi-circle"></i><span>Categories</span>
+                    <a class="nav-link collapse" th:href="@{/roomsList}">
+                        <i class="bi bi-circle"></i><span>Rooms</span>
                     </a>
-                </li><!-- End Role Nav -->
+                </li><!-- End Rooms Nav -->
             </ul>
         </li><!-- End Components Nav -->
 

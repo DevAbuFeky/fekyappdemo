@@ -32,7 +32,6 @@ public class Users {
     private String email;
     private String phone;
     private boolean enabled = true;
-
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<UserRole> userRole = new HashSet<>();

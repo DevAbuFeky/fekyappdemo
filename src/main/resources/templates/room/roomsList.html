@@ -13,11 +13,11 @@
          class="alert alert-success text-center">[[${message}]]</div>
 
     <div class="pagetitle">
-        <h1>Categories List</h1>
+        <h1>Rooms List</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
-                <li class="breadcrumb-item active">Categories List</li>
+                <li class="breadcrumb-item active">Rooms List</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -29,28 +29,38 @@
                 <div class="row">
                     <!-- Users List -->
                     <div class="col-12">
-                        <a class="btn btn-primary" th:href="@{/new}">
-                            New Category
+                        <a class="btn btn-primary" th:href="@{/newRoom}">
+                            New Room
                         </a>
                         <div class="card recent-sales overflow-auto">
                             <div class="card-body">
-                                <h5 class="card-title">Categories</h5>
+                                <h5 class="card-title">Rooms</h5>
                                 <table class="table table-borderless datatable">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Room Type</th>
+                                        <th scope="col">Room Description</th>
+                                        <th scope="col">Room Price</th>
+                                        <th scope="col">Available</th>
                                         <th scope="col">##</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="category, iStat : ${categoriesList}">
-                                        <th name="id" th:text="${category.id}"></th>
-                                        <td th:text="${category.name}" class="text-primary"></td>
-
-                                        <td><a href="" th:href="@{/updateCategory/{id}(id=${category.id})}">
+                                    <tr th:each="room, iStat : ${roomsList}">
+                                        <th name="id" th:text="${room.id}"></th>
+                                        <td th:text="${room.roomName}" class="text-primary"></td>
+                                        <td th:text="${room.roomType}" class="text-primary"></td>
+                                        <td th:text="${room.description}" class="text-primary"></td>
+                                        <td th:text="${room.roomPrice}" class="text-primary"><span>&#36;</span></td>
+                                        <td>
+                                            <span th:if="${room.active == true}" class="badge bg-success">Available</span>
+                                            <span th:if="${room.active == false}" class="badge bg-danger">Booked</span>
+                                        </td>
+                                        <td><a href="" th:href="@{/updateRoom/{id}(id=${room.id})}">
                                             <span class="ri-edit-box-line"></span></a>
-                                            <a href="" th:href="@{/removeCategory/{id}(id=${category.id})}" data-bs-toggle="modal" data-bs-target="#deleteUser">
+                                            <a th:href="@{/removeRoom/{id}(id=${room.id})}">
                                             <span class=" ri-delete-bin-5-fill"></span></a>
                                         </td>
                                     </tr>
@@ -63,24 +73,6 @@
                 </div>
             </div><!-- End side columns -->
         </div>
-
-        <div class="modal fade" id="deleteUser" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Delete User</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Delete User ?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div><!-- End Delete Modal-->
     </section>
 
 </main><!-- End #main -->

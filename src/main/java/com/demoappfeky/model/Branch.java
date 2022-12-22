@@ -11,35 +11,20 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 //@Data
-public class Book {
+public class Branch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
-    private Integer id;
-    private String tittle;
-    private String author;
-    private String publisher;
+    private Long id;
+    private String branchName;
     private String publicationDate;
-//    private String language;
-//    private int numberOfPages;
-//    private String format;
-//    private int isbn;
-    private double shippingWeight;
-    private double listPrice;
-    private double ourPrice;
-    private boolean active = true;
-
+    private boolean active;
     @Column(columnDefinition = "text")
     private String description;
-    private int inStockNumber;
-
-//    @Column(length = 255 )
-//    private String logo;
-
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
 
 //    @Transient
 //    public String getLogoImagePath(){

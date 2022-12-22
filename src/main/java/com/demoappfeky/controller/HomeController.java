@@ -10,12 +10,10 @@ public class HomeController {
     public String home() {
         return "index";
     }
-
     @GetMapping("/")
     public String index(){
         return "redirect:/home";
     }
-
     @GetMapping("/login")
     public String login() {
         return "login";

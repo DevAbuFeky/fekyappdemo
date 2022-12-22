@@ -1,5 +1,6 @@
 package com.demoappfeky.controller;
 
+import com.demoappfeky.model.Branch;
 import com.demoappfeky.model.Users;
 import com.demoappfeky.model.security.PasswordResetToken;
 import com.demoappfeky.model.security.Role;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.*;
 
@@ -122,9 +124,8 @@ public class UsersController {
 
     }
     @GetMapping("/updateUser/{id}")
-    public String updateImplants(@PathVariable long id, Model model, RedirectAttributes redirectAttributes){
+    public String updateUser(@PathVariable("id") long id, Model model){
         Optional<Users> user = usersServices.findByUserId(id);
-        redirectAttributes.addFlashAttribute("message", "User has been saved successfully.");
         if (user.isPresent()){
             model.addAttribute("user", user.get());
             return "users/updateUser";
@@ -132,10 +133,18 @@ public class UsersController {
             return "404";
         }
     }
+    @PostMapping("/updateUser")
+    public String updateBranchPost(@ModelAttribute("users") Users users, RedirectAttributes redirectAttributes){
+        usersServices.save(users);
+        redirectAttributes.addFlashAttribute("message", "The User has been updated successfully.");
+        return "redirect:/users";
+    }
+
     @GetMapping("/delete/{id}")
-    public String deleteImplants(@PathVariable long id){
+    public String deleteUser(@PathVariable("id") long id, RedirectAttributes redirectAttributes){
         usersServices.removeUserById(id);
-        return "users/usersList";
+        redirectAttributes.addFlashAttribute("message", "Branch has been Deleted successfully.");
+        return "redirect:/users";
     }
     @GetMapping("/createUser")
     public String getCreateNewUser(Model model){

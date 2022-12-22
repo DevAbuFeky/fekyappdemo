@@ -13,12 +13,12 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Add Category</h1>
+        <h1>Add Hotel</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
-                <li class="breadcrumb-item"><a th:href="@{/categoriesList}">Categories</a></li>
-                <li class="breadcrumb-item active">Add Category</li>
+                <li class="breadcrumb-item"><a th:href="@{/hotelList}">Hotels</a></li>
+                <li class="breadcrumb-item active">Add Hotel</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -30,14 +30,14 @@
                     <div class="card-body">
                         <h5 class="card-title"></h5>
                         <!-- No Labels Form -->
-                        <form class="row g-3" th:action="@{/save}" method="post" th:object="${category}">
+                        <form class="row g-3" th:action="@{/newHotel}" method="post" th:object="${hotel}">
                             <input type="hidden" name="id"  th:field="*{id}">
                             <div class="col-md-12">
-                                <input type="text" class="form-control" th:field="*{name}" placeholder="Please enter category name">
+                                <input type="text" class="form-control" th:field="*{hotelName}" placeholder="Please enter Hotel name">
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a type="button" class="btn btn-secondary" th:href="@{/categoriesList}">Cancel</a>
+                                <a type="button" class="btn btn-secondary" th:href="@{/hotelList}">Cancel</a>
                             </div>
                         </form><!-- End No Labels Form -->
                     </div>

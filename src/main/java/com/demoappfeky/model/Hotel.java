@@ -1,22 +1,20 @@
 package com.demoappfeky.model;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
-public class Category {
+public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column(length = 255, nullable = false, unique = true)
-    private String name;
+    private String hotelName;
 
 }
 

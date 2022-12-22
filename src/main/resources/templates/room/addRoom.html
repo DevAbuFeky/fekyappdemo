@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html>
+<head th:insert="fragments.html :: head"></head>
+<body>
+<!-- ======= Header ======= -->
+<header th:insert="fragments.html :: header"></header>
+<!-- ======= Sidebar ======= -->
+<div th:insert="fragments.html :: nav"></div>
+
+<!-- Content -->
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Add Room</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/roomsList}">Rooms</a></li>
+                <li class="breadcrumb-item active">Add Room</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <!-- No Labels Form -->
+                        <form class="row g-3" th:action="@{/newRoom}" method="post" th:object="${room}">
+                            <input type="hidden" name="id"  th:field="*{id}">
+                            <div class="col-md-10">
+                                <label>Room Name</label>
+                                <input type="text" class="form-control" th:field="*{roomName}" placeholder="Please enter Room name">
+                            </div>
+
+                            <div class="col-md-10">
+                                <label>Room Price</label>
+                                <input type="number" class="form-control" step="1" th:field="*{roomPrice}">
+                            </div>
+
+                            <div class="col-md-10">
+                                <label>Room Type</label>
+                                <input type="text" class="form-control" th:field="*{roomType}" placeholder="Please enter Room Type">
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 col-form-label">Branches</label>
+                                    <select th:field="*{branch}" th:value="${room.branch}"
+                                            class="form-select" aria-label="Default select example" required>
+                                        <option value="" selected="selected">Please select Hotel...</option>
+                                        <th:block th:each="branch : ${branchList}">
+                                            <option th:text="${branch.branchName}" th:value="${branch.id}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <fieldset class="row mb-3">
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 col-form-label">Status</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" id="active1" name="active"
+                                               checked="checked">
+                                        <label class="form-check-label" for="active1">
+                                            Available
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="false" type="radio" name="active" id="active2">
+                                        <label class="form-check-label" for="active2">
+                                            Booked
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+<!--                            <div class="row mb-3">-->
+<!--                                <div class="col-sm-10">-->
+<!--                                        <textarea rows="5" class="tinymce-editor" th:field="*{description}"-->
+<!--                                                  placeholder="Description"></textarea>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                            <div class="row mb-3">
+                                <div class="col-sm-10">
+                                        <textarea rows="5" class="form-control" th:field="*{description}"
+                                                  placeholder="Description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a type="button" class="btn btn-secondary" th:href="@{/roomsList}">Cancel</a>
+                            </div>
+                        </form><!-- End No Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:insert="fragments.html :: script"></div>
+</body>
+
+</html>

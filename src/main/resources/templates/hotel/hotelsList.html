@@ -13,11 +13,11 @@
          class="alert alert-success text-center">[[${message}]]</div>
 
     <div class="pagetitle">
-        <h1>Users List</h1>
+        <h1>Hotels List</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
-                <li class="breadcrumb-item active">Users List</li>
+                <li class="breadcrumb-item active">Hotels List</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -29,39 +29,29 @@
                 <div class="row">
                     <!-- Users List -->
                     <div class="col-12">
-                        <a class="btn btn-primary" th:href="@{/createUser}">
-                            New User
+                        <a class="btn btn-primary" th:href="@{/newHotel}">
+                            New Hotel
                         </a>
                         <div class="card recent-sales overflow-auto">
                             <div class="card-body">
-                                <h5 class="card-title">Users</h5>
+                                <h5 class="card-title">Hotels</h5>
                                 <table class="table table-borderless datatable">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
-                                        <th scope="col">Username</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Active</th>
+                                        <th scope="col">Name</th>
                                         <th scope="col">##</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="user, iStat : ${usersList}">
-                                        <th name="id" th:text="${user.id}"></th>
-                                        <td th:text="${user.firstName}" class="text-primary"></td>
-                                        <td th:text="${user.lastName}" class="text-primary"></td>
-                                        <td th:text="${user.userName}" class="text-primary"></td>
-                                        <td th:text="${user.email}" class="text-primary"></td>
-                                        <td>
-                                            <span th:if="${user.enabled == true}" class="badge bg-success">Available</span>
-                                            <span th:if="${user.enabled == false}" class="badge bg-danger">DisActive</span>
-                                        </td>
-                                        <td><a href="" th:href="@{/updateUser/{id}(id=${user.id})}">
+                                    <tr th:each="hotel, iStat : ${hotelsList}">
+                                        <th name="id" th:text="${hotel.id}"></th>
+                                        <td th:text="${hotel.hotelName}" class="text-primary"></td>
+                                        <td><a href="" th:href="@{/updateHotel/{id}(id=${hotel.id})}">
                                             <span class="ri-edit-box-line"></span></a>
-                                            <a href="" th:href="@{/delete/{id}(id=${user.id})}">
-                                            <span class=" ri-delete-bin-5-fill"></span></a></td>
+                                            <a href="" th:href="@{/removeHotel/{id}(id=${hotel.id})}">
+                                            <span class=" ri-delete-bin-5-fill"></span></a>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

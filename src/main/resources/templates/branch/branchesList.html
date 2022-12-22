@@ -12,11 +12,11 @@
          class="alert alert-success text-center">[[${message}]]</div>
 
     <div class="pagetitle">
-        <h1>Products List</h1>
+        <h1>Branches List</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
-                <li class="breadcrumb-item active">Products List</li>
+                <li class="breadcrumb-item active">Branches List</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -28,8 +28,8 @@
                 <div class="row">
                     <!-- Users List -->
                     <div class="col-12">
-                        <a class="btn btn-primary" th:href="@{/addProduct}">
-                            New Product
+                        <a class="btn btn-primary" th:href="@{/addBranch}">
+                            New Branch
                         </a>
                         <div class="card recent-sales overflow-auto">
                             <div class="card-body">
@@ -38,32 +38,31 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Tittle</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">List Price</th>
-                                        <th scope="col">Our Price</th>
-                                        <th scope="col">Publication Date</th>
+                                        <th scope="col">Branch Name</th>
+                                        <th scope="col">Hotel</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Branch Description</th>
                                         <th scope="col">Active</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">##</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="book, iStat : ${bookList}">
-                                        <th name="id" th:text="${book.id}"></th>
-                                        <td th:text="${book.tittle}" class="text-primary"></td>
-                                        <td th:text="${book.category.name}" class="text-primary"></td>
-                                        <td th:text="${book.listPrice}" class="text-primary"></td>
-                                        <td th:text="${book.ourPrice}" class="text-primary"></td>
-                                        <td th:text="${book.publicationDate}" class="text-primary"></td>
-                                        <td th:text="${book.active}" class="text-primary"></td>
+                                    <tr th:each="branch, iStat : ${branchList}">
+                                        <th name="id" th:text="${branch.id}"></th>
+                                        <td th:text="${branch.branchName}" class="text-primary"></td>
+                                        <td th:text="${branch.hotel.hotelName}" class="text-primary"></td>
+                                        <td th:text="${branch.publicationDate}" class="text-primary"></td>
+                                        <td th:text="${branch.description}" class="text-primary"></td>
+                                        <td>
+                                            <span th:if="${branch.active == true}" class="badge bg-success">Active</span>
+                                            <span th:if="${branch.active == false}" class="badge bg-danger">DisActive</span>
+                                        </td>
 
                                         <td>
-                                            <input hidden="hidden" name="id" th:value="${book.id}"/>
-                                            <button th:id="'oneBook-'+${book.id}" class="btn btn-danger btn-xs delete-book" type="submit" value="delete" >
-                                                <span class="ri-delete-bin-2-fill"></span></button>
-
-                                            <a href="" class="btn btn-primary btn-xs delete-book" th:href="@{/updateProduct?id=}+${book.id}">
+                                            <a href="" th:href="@{/updateBranch?id=}+${branch.id}">
                                                 <span class="ri-edit-box-line"></span></a>
+                                            <a href="" th:href="@{/removeBranch/{id}(id=${branch.id})}">
+                                                <span class=" ri-delete-bin-5-fill"></span></a>
                                         </td>
                                     </tr>
                                     </tbody>
