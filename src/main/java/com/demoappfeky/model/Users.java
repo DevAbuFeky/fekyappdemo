@@ -28,7 +28,7 @@ public class Users {
     private String job;
     private String country;
 
-    @Column(name = "email", nullable = false, updatable = false)
+    @Column(name = "email", nullable = false)
     private String email;
     private String phone;
     private boolean enabled = true;

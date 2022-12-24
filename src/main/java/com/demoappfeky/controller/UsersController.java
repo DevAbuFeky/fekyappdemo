@@ -134,16 +134,19 @@ public class UsersController {
         }
     }
     @PostMapping("/updateUser")
-    public String updateBranchPost(@ModelAttribute("users") Users users, RedirectAttributes redirectAttributes){
+    public String updateBranchPost(@ModelAttribute("users") Users users,
+                                   @ModelAttribute("password") String password,
+                                   RedirectAttributes redirectAttributes){
+        users.setPassword(SecurityUtility.passwordEncoder().encode(password));
         usersServices.save(users);
-        redirectAttributes.addFlashAttribute("message", "The User has been updated successfully.");
+        redirectAttributes.addFlashAttribute("message", "The User has been Updated Successfully.");
         return "redirect:/users";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id, RedirectAttributes redirectAttributes){
         usersServices.removeUserById(id);
-        redirectAttributes.addFlashAttribute("message", "Branch has been Deleted successfully.");
+        redirectAttributes.addFlashAttribute("message", "Branch has been Deleted Successfully.");
         return "redirect:/users";
     }
     @GetMapping("/createUser")
