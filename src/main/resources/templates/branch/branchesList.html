@@ -61,7 +61,8 @@
                                         <td>
                                             <a href="" th:href="@{/updateBranch?id=}+${branch.id}">
                                                 <span class="ri-edit-box-line"></span></a>
-                                            <a href="" th:href="@{/removeBranch/{id}(id=${branch.id})}">
+                                            <a th:href="@{/removeBranch/{id}(id=${branch.id})}"
+                                               th:onclick="if (!(true('Are you sure about delete it?!'))) return false">
                                                 <span class=" ri-delete-bin-5-fill"></span></a>
                                         </td>
                                     </tr>

@@ -49,7 +49,8 @@
                                         <td th:text="${hotel.hotelName}" class="text-primary"></td>
                                         <td><a href="" th:href="@{/updateHotel/{id}(id=${hotel.id})}">
                                             <span class="ri-edit-box-line"></span></a>
-                                            <a href="" th:href="@{/removeHotel/{id}(id=${hotel.id})}">
+                                            <a th:href="@{/removeHotel/{id}(id=${hotel.id})}"
+                                               th:onclick="if (!(true('Are you sure about delete it?!'))) return false">
                                             <span class=" ri-delete-bin-5-fill"></span></a>
                                         </td>
                                     </tr>

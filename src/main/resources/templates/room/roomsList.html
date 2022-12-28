@@ -60,7 +60,8 @@
                                         </td>
                                         <td><a href="" th:href="@{/updateRoom/{id}(id=${room.id})}">
                                             <span class="ri-edit-box-line"></span></a>
-                                            <a th:href="@{/removeRoom/{id}(id=${room.id})}">
+                                            <a th:href="@{/removeRoom/{id}(id=${room.id})}"
+                                                th:onclick="if (!(true('Are you sure about delete it?!'))) return false">
                                             <span class=" ri-delete-bin-5-fill"></span></a>
                                         </td>
                                     </tr>
